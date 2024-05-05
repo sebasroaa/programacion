@@ -93,18 +93,18 @@ class Maestro {
 
     imprimirSalario() {
         console.info(`El salario por hora de ${this.nombre} es ${this.salarioPorHora}`);
-    }
-    calcularSalario(recargomaestria, asignaturas) {
+    } 
+  /*   calcularSalario(/* recargomaestria,  Asignatura) {
         let totalRecargo = 0;
-        for (let i = 0; i < asignaturas.length; i++) {
-            totalRecargo += asignaturas[i].calcularRecargo(recargomaestria);
+        for (let i = 0; i < Asignatura.length; i++) {
+            totalRecargo += Asignatura[i].calcularRecargo(this.horas);
         }
         return this.salarioPorHora + totalRecargo;
-    }
+    } */
 
-    imprimirSalario(recargomaestria, asignaturas) {
-        console.info(`El salario por hora de ${this.nombre} es ${this.calcularSalario(recargomaestria, asignaturas)}`);
-    }
+   /*  imprimirSalario(recargomaestria, Asignatura) {
+        console.info(`El salario por hora de ${this.nombre} es ${this.calcularSalario( ecargomaestria,  Asignatura)}`);
+    } */
 
 }
 
@@ -126,6 +126,7 @@ class ProfesorCatedraticoAsociado extends ProfesorCatedratico {
     constructor(nombre, telefono, correo, carrera) {
         super(nombre, telefono, correo, carrera);
         this.salarioPorHora = parseFloat(readlineSync.question('Por favor ingresa el valor de hora del maestro de Asociado: ') * 1.07); // Gana un 7% más que el profesor catedrático
+        
     }
 }
 
@@ -145,16 +146,18 @@ while (continuar.toLowerCase() == 's') {
     } else if (contratoelegido == 'p') {
         profesor = new ProfesorPlanta();
         console.info("El Contrato selecionado es de planta");
+        
     }
-    profesor.ingresarDatos();
+     profesor.ingresarDatos();
     listaMaestros.push(profesor);
     continuar = readlineSync.question('¿Deseas ingresar otro maestro? (s/n): ');
+    
 }
 
 // Imprimir salarios de todos los maestros en la lista
-for (let i = 0; i < listaMaestros.length; i++) {
-    listaMaestros[i].imprimirSalario(recargomaestria, listaAsignatura); 
-}
-/* ProfesorPlanta.imprimirSalario();
+/*  for (let i = 0; i < listaMaestros.length; i++) {
+    listaMaestros[i].imprimirSalario( recargomaestria,  Asignatura); 
+}   */
+ ProfesorPlanta.imprimirSalario();
 ProfesorCatedratico.imprimirSalario();
-ProfesorCatedraticoAsociado.imprimirSalario(); */
+ProfesorCatedraticoAsociado.imprimirSalario();

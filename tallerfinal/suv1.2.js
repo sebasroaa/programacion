@@ -7,8 +7,7 @@ class Maestro
     correo="";
     carrera="";
     contrato= null;
-    horacatedratico=8000;
-    horaplanta=10000;
+    salarioPorHora = 0;
 
     constructor(nombre, telefono, correo, carrera) {
         this.nombre = nombre;
@@ -17,7 +16,7 @@ class Maestro
         this.carrera = carrera;
     }
     ingresarDatos() {
-        this.nombre = readlineSync.question('Por favor ingresa el nombre del maestro: ');
+        this.nombre = readlineSync.question('Por favor ingresa el nombredel maestro: ');
         if (!this.nombre){
             throw new Eror(`Debe ingresar el nombre: `);
          }
@@ -39,49 +38,36 @@ class Maestro
     }
    
 }
-class TipoProfesor extends Maestro{
-    tipoprofesor ="";
-    constructor(nombre, telefono, correo, carrera,tipoprofesor) {
+
+class ProfesorPlanta extends Maestro {
+    constructor(nombre, telefono, correo, carrera) {
         super(nombre, telefono, correo, carrera);
-        if(!tipoprofesor){
-            throw new Error("El tipo de contrato no esta en la lista");
-        }
-        this.tipoprofesor=tipoprofesor;
-        }
-        salarioPorHora(){}
-}
-
-
-class ProfesorPlanta extends TipoProfesor {
-    constructor(nombre, telefono, correo, carrera) {
-        super(nombre, telefono, correo, carrera,"p")
-         }
-         salarioPorHora(){
-            const nuevoprecio = this.horaplanta;
-            return nuevoprecio;
-               }
-}
-
-class ProfesorCatedratico extends TipoProfesor {
-    constructor(nombre, telefono, correo, carrera) {
-        super(nombre, telefono, correo, carrera,"c");
+        this.salarioPorHora = parseFloat(readlineSync.question('Por favor ingresa el valor de hora del maestro de planta: ')); // Reemplaza X con el valor que desees
     }
-    salarioPorHora(){
-        const nuevoprecio = this.horacatedratico;
-        return nuevoprecio;
-           }
-
 }
 
-class ProfesorCatedraticoAsociado extends TipoProfesor {
-    constructor(nombre, telefono, correo, carrera,) {
-        super(nombre, telefono, correo, carrera,"a");
-         // Gana un 7% más que el profesor catedrático = 1.07
+class ProfesorCatedratico extends Maestro {
+    constructor(nombre, telefono, correo, carrera) {
+        super(nombre, telefono, correo, carrera);
+        this.salarioPorHora = parseFloat(readlineSync.question('Por favor ingresa el valor de hora del maestro catedratico: ')); // Reemplaza Y con el valor que desees
     }
-    salarioPorHora(){
-        const nuevoprecio = this.horacatedratico * 0.07;
-        return nuevoprecio;
-           }
+}
+
+class ProfesorCatedraticoAsociado extends ProfesorCatedratico {
+    constructor(nombre, telefono, correo, carrera) {
+        super(nombre, telefono, correo, carrera);
+        this.salarioPorHora =parseFloat(readlineSync.question('Por favor ingresa el valor de hora del maestro de Asociado: ')* 1.07 ); // Gana un 7% más que el profesor catedrático
+    }
+    costototalplanta(){
+        let costoTotal = 0;
+        for (let i = 0; i < listaMaestros.length; i++) {
+            if (listaMaestros[i] instanceof ProfesorPlanta) {
+                costoTotal += listaMaestros[i].salarioPorHora * listaMaestros[i].horas;
+            }
+        }
+        return costoTotal;
+    }
+    
 }
 
 const listaMaestros=[];
@@ -90,19 +76,18 @@ let continuar = 's';
 while (continuar.toLowerCase() == 's') {
     let profesor;
     const contratoelegido = readlineSync.question(`Que tipo de contrato va a tener el meastro Catedratico(c),Catedratico Asociado(a),Planta(p): `);
-    if(TipoProfesor == 'c'){
+    if(contratoelegido == 'c'){
         profesor = new ProfesorCatedratico();
         console.info("El Contrato selecionado es Catedratico");
     }
-    else if(TipoProfesor == 'a'){
+    else if(contratoelegido == 'a'){
         profesor = new ProfesorCatedraticoAsociado();
         console.info("El Contrato selecionado es Catedratico Asociado");
     }
-    else if(TipoProfesor == 'p'){
+    else if(contratoelegido == 'p'){
         profesor = new ProfesorPlanta();
         console.info("El Contrato selecionado es de planta");
     }
-
     profesor.ingresarDatos();
     listaMaestros.push(profesor);
     continuar = readlineSync.question('¿Deseas ingresar otro maestro? (s/n): ');
@@ -161,7 +146,15 @@ while (agregar.toLowerCase() == 's') {
     agregar = readlineSync.question('¿Deseas ingresar otra asignatura? (s/n): ');
 }
 
-/* profesorPlanta.imprimirSalario();
+profesorPlanta.imprimirSalario();
 profesorCatedratico.imprimirSalario();
-profesorCatedraticoAsociado.imprimirSalario(); */
+profesorCatedraticoAsociado.imprimirSalario();
 
+let costoTotalNomina = 0;
+for (let i = 0; i < listaMaestros.length; i++) {
+    costoTotalNomina += listaMaestros[i].salarioPorHora * listaMaestros[i].horas;
+}
+console.log(`El costo total de la nómina de toda la universidad es: ${costoTotalNomina}`);
+
+
+console.log(`El costo total de los profesores de planta es: ${costoTotalProfesoresPlanta()}`);
