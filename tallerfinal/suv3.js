@@ -31,6 +31,7 @@ class Asignatura {
 
     calcularRecargo(recargomaestria) {
         if (this.requiereMaestria) {
+            //utilizamos el toLowerCase para convertir el texto a minusco y no nos muestre un error 
             if (this.horario.toLowerCase() == 'd') {
                 return this.horas * recargomaestria / 100;
             } else if (this.horario.toLowerCase() == 'n') {
@@ -45,11 +46,13 @@ let listaAsignatura = [];
 
 // Crear una nueva instancia de Asignatura e ingresar datos
 let agregar = 's';
+//utilizamos el toLowerCase para convertir el texto a minusco y no nos muestre un error 
 while (agregar.toLowerCase() == 's') {
     let asignatura = new Asignatura();
     asignatura.ingresarAsignatura();
     let maestria = readlineSync.question('La asignatura requiere maestria? (s/n): ');
     asignatura.requiereMaestria = (maestria.toLowerCase() === 's');
+    //Con el push ingresamos los datos a la lista que solciitamos 
     listaAsignatura.push(asignatura);
     agregar = readlineSync.question('¿Deseas ingresar otra asignatura? (s/n): ');
 }
@@ -129,7 +132,8 @@ class ProfesorCatedraticoAsociado extends ProfesorCatedratico {
 const listaMaestros = [];
 
 let continuar = 's';
-while (continuar.toLowerCase() == 's') {
+//utilizamos el toLowerCase para convertir el texto a minusco y no nos muestre un error 
+while (continuar.toLowerCase() == 's') { 
     let profesor;
     const contratoelegido = readlineSync.question(`Que tipo de contrato va a tener el meastro Catedratico(c),Catedratico Asociado(a),Planta(p): `);
     if (contratoelegido == 'c') {
@@ -149,7 +153,7 @@ while (continuar.toLowerCase() == 's') {
 
 // Imprimir salarios de todos los maestros en la lista
 for (let i = 0; i < listaMaestros.length; i++) {
-    listaMaestros[i].imprimirSalario(recargomaestria, listaAsignatura); // Reemplaza M con el porcentaje de recargo correspondiente
+    listaMaestros[i].imprimirSalario(recargomaestria, listaAsignatura); 
 }
 /* ProfesorPlanta.imprimirSalario();
 ProfesorCatedratico.imprimirSalario();
