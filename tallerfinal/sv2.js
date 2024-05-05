@@ -16,14 +16,14 @@ class Asignatura
 
 }
 
-const asignatura2 = new Asignatura('matematicas', 2000000, 'plata', 3000);
-const asignatura3 = new Asignatura('negocios', 30000000, 'dorado', 7000);
-const asignatura1 = new Asignatura('', 1000000, 'bronce', 500);
-const asignatura4 = new Asignatura(''70000000, 'diamante', 10000);
-const asignatura5 = new Asignatura('', 1000000, 'bronce', 500);
-const asignatura6 = new Asignatura('', 2000000, 'plata', 3000);
-const asignatura7 = new Asignatura('', 30000000, 'dorado', 7000);
-const asignatura8 = new Asignatura(''70000000, 'diamante', 10000);
+const asignatura2 = new Asignatura('matematicas', 2, 'contaduria',`Dia`);
+const asignatura3 = new Asignatura('negocios', 3, 'Administracion Empresas', `Nochec`);
+const asignatura1 = new Asignatura('ingles', 1, 'Ingenieria Sistemas', `Nochec`);
+const asignatura4 = new Asignatura('progrmacion',7, 'Ingenieria Seguridad', `Dia`);
+const asignatura5 = new Asignatura('redes', 1, 'Ingenieria Sistemas', `Dia`);
+const asignatura6 = new Asignatura('hackin ', 2, 'Ingenieria Seguridad', `Nochec`);
+const asignatura7 = new Asignatura('historia', 3, 'Psicologia', `DIa`);
+const asignatura8 = new Asignatura('etica',7, 'Contaduria', `Nochec`);
 
 
 class Maestro
@@ -51,10 +51,10 @@ let listaMaestros = [];
 
 // Crear una nueva instancia de Maestro e ingresar datos
 let continuar = 's';
-while (continuar.toLowerCase() === 's') {
-    let maestro = new Maestro();
-    maestro.ingresarDatos();
-    listaMaestros.push(maestro);
+while (continuar.toLowerCase() == 's') {
+    let profesor = new Maestro();
+    profesor.ingresarDatos();
+    listaMaestros.push(profesor);
     continuar = readlineSync.question('¿Deseas ingresar otro maestro? (s/n): ');
 }
 

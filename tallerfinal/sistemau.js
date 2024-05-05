@@ -48,3 +48,5 @@ while (continuar.toLowerCase() === 's') {
 for (let i = 0; i < listaMaestros.length; i++) {
     console.log(`Maestro ${i+1}: Nombre: ${listaMaestros[i].nombre}, Teléfono: ${listaMaestros[i].telefono}, Correo: ${listaMaestros[i].correo}, Carrera: ${listaMaestros[i].carrera}`);
 }
+
+
