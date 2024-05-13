@@ -330,15 +330,10 @@ function seleccionarProfesor() {
 function mostrarMenu() {
   console.info("\nMenú:");
   console.info("1. Ingresar programa");
-  console.info("2. Obtener costo total de la nómina de la universidad");
-  console.info("3. Obtener costo por programa");
-  console.info("4. Mostrar listado de programas");
-  console.info("5. Obtener promedio del costo de los profesores que dan clases");
-  console.info("6. Costo por profesor");
-  console.info("7. Mostrar listado de profesores");
-  console.info("8. Calcular pago a los profesores de planta");
-  console.info("9. Calcular pago a los profesores catedráticos");
-  console.info("10. Contar profesores con maestría");
+  console.info("2. Obtener costo por programa");
+  console.info("3. Mostrar listado de programas");
+  console.info("4. Costo por profesor");
+ 
   console.info("11. Salir");
 }
 function iniciar() {
@@ -352,33 +347,15 @@ function iniciar() {
             ingresarPrograma();
               break;
           case 2:
-              obtenerCostoTotalNomina();
-              break;
-          case 3:
               obtenerCostoPorPrograma();
               break;
-          case 4:
+          case 3:
               mostrarListadoProgramas();
               break;
-          case 5:
-              obtenerPromedioCostoProfesores();
-              break;
-          case 6:
+          case 4:
               seleccionarProfesor();
               break;
-          case 7:
-              mostrarListadoProfesores();
-              break;
-          case 8:
-              calcularPagoProfesoresPlanta();
-              break;
-          case 9:
-              calcularPagoProfesoresCatedraticos();
-              break;
-          case 10:
-              contarProfesoresMaestria();
-              break;
-          case 11:
+           case 5:
               console.info("Saliendo del programa...");
               break;
           default:
