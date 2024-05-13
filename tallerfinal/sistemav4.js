@@ -1,17 +1,31 @@
 const readlineSync = require(`readline-sync`);
+class programa{
+    nombrep = ""; //contaduria publica , Administracion de empresas, Ingenieria de sistemas,ingenieria seguridad informatica, psicologia
+
+    listaAsignatura = [];
+    
+
+
+    constructor(nombrep){
+        this.nombrep=nombrep;
+    }
+}
+
 class Asignatura
 {
     nombreA="";
     horas=0;
-    programa="";//contaduria publica , Administracion de empresas, Ingenieria de sistemas,ingenieria seguridad informatica, psicologia
-    requiereMaestria= false
+        requiereMaestria= false
+    profesor=null;
+    
 
-    constructor(nombreA, horas, programa, horario){
+    constructor(nombreA, horas, programa, horario,profesor){
         this.nombreA = nombreA;
         this.horas = horas;
         this.programa= programa;
         this.horario= horario;
         this.requiereMaestria = false;
+        this.profesor;
         
     }
     ingresarAsignatura() {
@@ -21,8 +35,9 @@ class Asignatura
        
     }
     
+    
 }
-let listaAsignatura = [];
+/* let listaAsignatura = [];
 let agregar = 's';
 while (agregar.toLowerCase() == 's') {
     let asignatura = new Asignatura();
@@ -31,19 +46,25 @@ while (agregar.toLowerCase() == 's') {
     asignatura.requiereMaestria = (maestria.toLowerCase() === 's');
     listaAsignatura.push(asignatura);
     agregar = readlineSync.question('¿Deseas ingresar otra asignatura? (s/n): ');
-}
+} */
 class Maestro {
-    nombre = "";
+    #nombre = "";
     telefono = "";
     correo = "";
     carrera = "";
     horario="";//dia o noche
     
     constructor(nombre, telefono, correo, carrera) {
-        this.nombre = nombre;
+        this.#nombre = nombre;
         this.telefono = telefono;
         this.correo = correo;
         this.carrera = carrera;
+    }
+    get nombre(){
+        return this.#nombre;
+    }
+    set nombre(nombre){
+        this.#nombre=nombre
     }
     ingresarDatos() {
         this.nombre = readlineSync.question('Por favor ingresa el nombredel maestro: ');
@@ -136,7 +157,7 @@ class ProfesorCatedratico extends TipoProfesor {
 class ProfesorCatedraticoAsociado extends TipoProfesor {
     horacatedratico=8000;
     constructor(nombre, telefono, correo, carrera) {
-        super(nombre, telefono, correo, carrera,"c")
+        super(nombre, telefono, correo, carrera,"a")
 
          }
          salarioPorHora(){
